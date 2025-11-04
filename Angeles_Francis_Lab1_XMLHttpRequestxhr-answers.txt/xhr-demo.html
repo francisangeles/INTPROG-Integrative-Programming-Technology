@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple XMLHttpRequest Example</title>
+</head>
+<body>
+  <h2>Exploring XMLHttpRequest</h2>
+  <button id="loadBtn">Load Post Data</button>
+  <div id="result" style="margin-top: 20px;"></div>
+
+  <script>
+  
+    document.getElementById("loadBtn").onclick = function() {
+	
+      var xhr = new XMLHttpRequest();
+	  
+      xhr.onload = function() {
+        var resultDiv = document.getElementById("result");
+		
+        if (xhr.status === 200) {
+          resultDiv.innerHTML = `
+            <h3 style="color:green;">Post Loaded Successfully!</h3>
+            <p><b>Title:</b> Lab Exercise 2 – Exploring XMLHttpRequest</p>
+            <p><b>Content:</b> To understand and demonstrate how JavaScript’s XMLHttpRequest object communicates with a server, retrieves data, and handles responses and errors.</p>
+          `;
+		  
+        } else {
+          resultDiv.innerHTML = `
+            <span style="color:red;">Error: ${xhr.status} - ${xhr.statusText}</span>
+          `;
+        }
+      };
+
+      xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+      xhr.send();
+    };
+  </script>
+</body>
+</html>
